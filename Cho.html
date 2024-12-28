@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apology Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #FFB6C1, #FFC0CB);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Background overlay to dim the page */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Popup styling */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 240, 245, 0.95);
+            color: #333;
+            border-radius: 15px;
+            padding: 25px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #popup h1 {
+            margin: 0 0 15px;
+            font-size: 1.8em;
+            color: #FF69B4;
+        }
+
+        #popup p {
+            margin: 10px 0;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        #popup button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: #fff;
+            background: #FF69B4;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #popup button:hover {
+            background: #FF1493;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dimmed overlay -->
+    <div id="overlay"></div>
+
+    <!-- Popup container -->
+    <div id="popup">
+        <h1 id="popup-title"></h1>
+        <p id="popup-message"></p>
+        <button onclick="nextMessage()">Next</button>
+    </div>
+
+    <script>
+        // Apology messages
+        const messages = [
+            { title: "Hello, Sweet One!", text: "I know you are over it cuz you are such a sweet soul who forgave me for what I did." },
+            { title: "You Are Special", text: "But I want to give you this small gift to show you how much your feelings mean to me." },
+            { title: "With Love", text: "Even if you see them as something ordinary, you are extraordinary to me. \nMuch love, \n#Chivo" }
+        ];
+
+        let index = 0;
+
+        function showPopup() {
+            const popup = document.getElementById("popup");
+            const overlay = document.getElementById("overlay");
+            const title = document.getElementById("popup-title");
+            const message = document.getElementById("popup-message");
+
+            // Update popup content
+            title.textContent = messages[index].title;
+            message.innerHTML = messages[index].text.replace(/\n/g, "<br>");
+
+            // Show overlay and popup with a smooth transition
+            overlay.style.display = "block";
+            popup.style.display = "block";
+        }
+
+        function nextMessage() {
+            index++;
+            if (index < messages.length) {
+                showPopup();
+            } else {
+                document.getElementById("popup").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            }
+        }
+
+        window.onload = () => {
+            showPopup();
+        };
+    </script>
+</body>
+</html>
